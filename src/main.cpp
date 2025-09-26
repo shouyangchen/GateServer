@@ -8,9 +8,6 @@
 #include "Server.h"
 #include <hiredis/hiredis.h>
 #include "LogSystem.h"
-#include "MySqlPool.h"
-#include "MySqlDao.h"
-#include "MySqlMgr.h" 
 
 
 int main(int argc, char *argv[])

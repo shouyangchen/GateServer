@@ -1,7 +1,6 @@
 #ifndef MY_SQL_POOL_H
 #define MY_SQL_POOL_H
 
-#include "const.h"
 #include "LogSystem.h"
 class MySqlPool {
 public:

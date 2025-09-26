@@ -8,15 +8,11 @@
 #include <boost/beast/http.hpp>
 #include <boost/beast.hpp>
 #include <boost/asio.hpp>
-#include "singleton.h"
-#include <functional>
-#include <map>
 #include <json/json.h>
 #include <json/value.h>
 #include <json/reader.h>
-#include <atomic>
 #include <memory>
-#include <queue>
+#include "singleton.h"
 #include <hiredis/hiredis.h>
 #include <hiredis/async.h>
 #include "RedisPool.h"
@@ -24,9 +20,12 @@
 #include <mysql++/connection.h>
 #include <mysql++/query.h>
 extern std::shared_ptr<RedisPool> redispool; // Redis连接池实例
+
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace net = boost::asio;            // from <boost/asio.hpp>
+
+
 using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 enum ErrorCodes {
     Success = 0,

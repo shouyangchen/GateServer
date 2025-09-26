@@ -4,6 +4,7 @@
 #include "MySqlDao.h"
 #include "singleton.h"
 #include <cstdint>
+#include <vector>
 
 class MySqlMgr : public singleton<MySqlMgr> {
     friend class singleton<MySqlMgr>;
@@ -14,8 +15,8 @@ public:
         return dao.RegUser(name, email, pwd);
     }
 
-    int64_t LoginUser(const std::string& email, const std::string& pwd,user_info&user) {
-        return dao.LoginUser(email, pwd,user);
+    int64_t LoginUser(const std::string& pwd,user_info&user,int is_email) {
+        return dao.LoginUser(pwd,user,is_email);
     }
 
     bool ExistsUser(const std::string& email, const std::string& uid) {
@@ -24,6 +25,16 @@ public:
 
     int64_t Change_Passwd_When_User_Forget_Passwd(const std::string& email, const std::string& uid, const std::string& new_passwd) {
         return dao.Change_Passwd_When_User_Forget_Passwd(email, uid, new_passwd);
+    }
+    
+    std::vector<char>Get_User_Icon(int uid)
+    {
+        return dao.Get_user_icon(uid);
+    }
+
+    std::uint64_t Get_User_id(std::string  email)
+    {
+        return dao.Get_user_uid(email);
     }
     
 private:
