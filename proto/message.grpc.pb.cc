@@ -185,5 +185,230 @@ StatusService::Service::~Service() {
 }
 
 
+static const char* FindOfflineMessagesService_method_names[] = {
+  "/message.FindOfflineMessagesService/FindOtherServerOfflineMessages",
+  "/message.FindOfflineMessagesService/FindOfflineMessagesNums",
+};
+
+std::unique_ptr< FindOfflineMessagesService::Stub> FindOfflineMessagesService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< FindOfflineMessagesService::Stub> stub(new FindOfflineMessagesService::Stub(channel, options));
+  return stub;
+}
+
+FindOfflineMessagesService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_FindOtherServerOfflineMessages_(FindOfflineMessagesService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_FindOfflineMessagesNums_(FindOfflineMessagesService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status FindOfflineMessagesService::Stub::FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::message::FindOtherServerOfflineMessagesRsp* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_FindOtherServerOfflineMessages_, context, request, response);
+}
+
+void FindOfflineMessagesService::Stub::async::FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOtherServerOfflineMessages_, context, request, response, std::move(f));
+}
+
+void FindOfflineMessagesService::Stub::async::FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOtherServerOfflineMessages_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>* FindOfflineMessagesService::Stub::PrepareAsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::message::FindOtherServerOfflineMessagesRsp, ::message::FindOtherServerOfflineMessagesReq, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_FindOtherServerOfflineMessages_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>* FindOfflineMessagesService::Stub::AsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncFindOtherServerOfflineMessagesRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status FindOfflineMessagesService::Stub::FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::message::FindOfflineMessagesNumsRsp* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_FindOfflineMessagesNums_, context, request, response);
+}
+
+void FindOfflineMessagesService::Stub::async::FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOfflineMessagesNums_, context, request, response, std::move(f));
+}
+
+void FindOfflineMessagesService::Stub::async::FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOfflineMessagesNums_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>* FindOfflineMessagesService::Stub::PrepareAsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::message::FindOfflineMessagesNumsRsp, ::message::FindOfflineMessagesNumsReq, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_FindOfflineMessagesNums_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>* FindOfflineMessagesService::Stub::AsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncFindOfflineMessagesNumsRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+FindOfflineMessagesService::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      FindOfflineMessagesService_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< FindOfflineMessagesService::Service, ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](FindOfflineMessagesService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::message::FindOtherServerOfflineMessagesReq* req,
+             ::message::FindOtherServerOfflineMessagesRsp* resp) {
+               return service->FindOtherServerOfflineMessages(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      FindOfflineMessagesService_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< FindOfflineMessagesService::Service, ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](FindOfflineMessagesService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::message::FindOfflineMessagesNumsReq* req,
+             ::message::FindOfflineMessagesNumsRsp* resp) {
+               return service->FindOfflineMessagesNums(ctx, req, resp);
+             }, this)));
+}
+
+FindOfflineMessagesService::Service::~Service() {
+}
+
+::grpc::Status FindOfflineMessagesService::Service::FindOtherServerOfflineMessages(::grpc::ServerContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status FindOfflineMessagesService::Service::FindOfflineMessagesNums(::grpc::ServerContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
+static const char* TransletMessageService_method_names[] = {
+  "/message.TransletMessageService/TransletMessage",
+};
+
+std::unique_ptr< TransletMessageService::Stub> TransletMessageService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< TransletMessageService::Stub> stub(new TransletMessageService::Stub(channel, options));
+  return stub;
+}
+
+TransletMessageService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_TransletMessage_(TransletMessageService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status TransletMessageService::Stub::TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::message::TransletMessageRsp* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::message::TransletMessageReq, ::message::TransletMessageRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_TransletMessage_, context, request, response);
+}
+
+void TransletMessageService::Stub::async::TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::message::TransletMessageReq, ::message::TransletMessageRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_TransletMessage_, context, request, response, std::move(f));
+}
+
+void TransletMessageService::Stub::async::TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_TransletMessage_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>* TransletMessageService::Stub::PrepareAsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::message::TransletMessageRsp, ::message::TransletMessageReq, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_TransletMessage_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>* TransletMessageService::Stub::AsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncTransletMessageRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+TransletMessageService::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      TransletMessageService_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< TransletMessageService::Service, ::message::TransletMessageReq, ::message::TransletMessageRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](TransletMessageService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::message::TransletMessageReq* req,
+             ::message::TransletMessageRsp* resp) {
+               return service->TransletMessage(ctx, req, resp);
+             }, this)));
+}
+
+TransletMessageService::Service::~Service() {
+}
+
+::grpc::Status TransletMessageService::Service::TransletMessage(::grpc::ServerContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
+static const char* SearchUserService_method_names[] = {
+  "/message.SearchUserService/SearchUser",
+};
+
+std::unique_ptr< SearchUserService::Stub> SearchUserService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< SearchUserService::Stub> stub(new SearchUserService::Stub(channel, options));
+  return stub;
+}
+
+SearchUserService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_SearchUser_(SearchUserService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status SearchUserService::Stub::SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::message::SearchUserRsp* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::message::SearchUserReq, ::message::SearchUserRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SearchUser_, context, request, response);
+}
+
+void SearchUserService::Stub::async::SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::message::SearchUserReq, ::message::SearchUserRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SearchUser_, context, request, response, std::move(f));
+}
+
+void SearchUserService::Stub::async::SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SearchUser_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>* SearchUserService::Stub::PrepareAsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::message::SearchUserRsp, ::message::SearchUserReq, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_SearchUser_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>* SearchUserService::Stub::AsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncSearchUserRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+SearchUserService::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      SearchUserService_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< SearchUserService::Service, ::message::SearchUserReq, ::message::SearchUserRsp, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](SearchUserService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::message::SearchUserReq* req,
+             ::message::SearchUserRsp* resp) {
+               return service->SearchUser(ctx, req, resp);
+             }, this)));
+}
+
+SearchUserService::Service::~Service() {
+}
+
+::grpc::Status SearchUserService::Service::SearchUser(::grpc::ServerContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
 }  // namespace message
 

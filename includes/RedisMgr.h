@@ -15,7 +15,7 @@ class RedisMgr : public singleton<RedisMgr>
 public:
     ~RedisMgr() = default;
     
-    bool connect(const std::string& host = "127.0.0.1", int port = 6380, const std::string& password = "");
+    bool connect(const std::string& host = "172.21.76.104", int port = 6379, const std::string& password = "123456");
     
     // 基本操作
     bool set(const std::string& key, const std::string& value);

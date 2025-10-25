@@ -13,6 +13,12 @@
 int main(int argc, char *argv[])
 {
 
+        try {
+        mysqlpp::Connection conn("onlinetalk", "127.0.0.1", "chenshouyang", "123456", 3307);
+   } catch (std::exception &e) {
+        std::cerr << "MySQL connection error: " << e.what() << std::endl;
+   
+   }  
     try
     {
 

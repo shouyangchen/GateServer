@@ -1,17 +1,20 @@
 #ifndef MY_SQL_POOL_H
 #define MY_SQL_POOL_H
 
+#include "ConfiMgr.h"
 #include "LogSystem.h"
+#include <iostream>
 class MySqlPool {
 public:
     MySqlPool(const std::string& url, const std::string& user, const std::string& pass, const std::string& db, int poolSize)
         : url_(url), user_(user), pass_(pass), db_(db), poolSize_(poolSize) {
         for (int i = 0; i < poolSize_; ++i) {
-            mysqlpp::Connection conn(this->db_.c_str(), this->url_.c_str(), this->user_.c_str(), this->pass_.c_str(), 3306);
+            mysqlpp::Connection conn(this->db_.c_str(), this->url_.c_str(), this->user_.c_str(), this->pass_.c_str(), ConfiMgr::getInstance()["Mysql"]["port"].empty() ? 3306 : std::stoi(ConfiMgr::getInstance()["Mysql"]["port"]));
             if (conn.connected()) {
                 available_connections_.push(std::move(conn));
             } else {
                 LogQueue::getInstance()->push(std::make_pair(LogLevel::ERROR, "Failed to create MySQL connection"));
+                std::cout << "Failed to create MySQL connection" << std::endl;
             }
         }
         

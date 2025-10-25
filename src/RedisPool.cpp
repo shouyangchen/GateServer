@@ -9,7 +9,7 @@ RedisPool::RedisPool()
     auto&config=ConfiMgr::getInstance();
     host_ = config["Redis"]["host"];
     port_ = std::stoi(config["Redis"]["port"]);
-    password_ = config["Redis"]["password"];
+    password_ = config["Redis"]["passwd"];
     pool_size_ = std::stoul(config["Redis"]["pool_size"]);
     // 预创建连接池
     for (size_t i = 0; i < pool_size_; ++i) {

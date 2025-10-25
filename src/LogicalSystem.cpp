@@ -271,7 +271,7 @@ LogicalSystem::LogicalSystem() {
         stub_m->GetChatServer(&client_context, grpc_request, &grpc_respon);
     if (Status_m.ok()) {
       root["error"] = ErrorCodes::Success; // 设置成功码
-      root["uid"] = users.uid;
+      root["uid"] = MySqlMgr::getInstance()->Get_User_id(email);
       root["token"] = grpc_respon.token();
       root["host"] = grpc_respon.host();
       root["port"] = grpc_respon.port();

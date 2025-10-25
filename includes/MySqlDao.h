@@ -107,7 +107,7 @@ inline int64_t  MysqlDao::LoginUser(const std::string& pwd, user_info& user,int 
                 << mysqlpp::quote << pwd << ","
                 <<mysqlpp::quote<<user.uid<<","
                 <<mysqlpp::quote<<is_email<<","
-                <<"@result"<<")"<<";";
+                <<"@login_result"<<")"<<";";
             std::cout << "Login_user query: " << query.str( ) << std::endl;
             if (!query.execute( ))
             {
@@ -115,13 +115,13 @@ inline int64_t  MysqlDao::LoginUser(const std::string& pwd, user_info& user,int 
                 pool_->releaseConnection(conn); // 释放连接
                 return ErrorCodes::MySqlError;
             }
-            // 获取 @result 的�?
-            mysqlpp::Query resultQuery = conn->query("SELECT @result");
+            // 获取 @login_result 的值
+            mysqlpp::Query resultQuery = conn->query("SELECT @login_result");
             mysqlpp::StoreQueryResult res = resultQuery.store( );
             if (res && res.num_rows( ) > 0)
             {
                 auto result = std::atoi(res[0][0].data( ));
-                mysqlpp::Query uidQuery = conn->query("SELECT @USER_UID");
+                mysqlpp::Query uidQuery = conn->query("SELECT @USER_UID");// 获取用户uid
                 mysqlpp::StoreQueryResult uid = uidQuery.store( );
                 if (uid && uid.num_rows( ) > 0)
                     user.uid = std::atoi(uid[0][0].data( ));
@@ -262,6 +262,7 @@ inline std::uint64_t MysqlDao::Get_user_uid(std::string  &user_email)
     if(result&&result[0][0])
     {
         auto user_id=std::atol(result[0][0].c_str());
+        std::cout<<"user id is "<<user_id<<std::endl;
         pool_->releaseConnection(conn);
         return user_id;
     }

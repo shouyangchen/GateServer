@@ -257,6 +257,7 @@ class StatusService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::LoginRsp>> PrepareAsyncLogin(::grpc::ClientContext* context, const ::message::LoginReq& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::LoginRsp>>(PrepareAsyncLoginRaw(context, request, cq));
     }
+    // 用户登录验证
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -264,6 +265,7 @@ class StatusService final {
       virtual void GetChatServer(::grpc::ClientContext* context, const ::message::GetChatServerReq* request, ::message::GetChatServerRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void Login(::grpc::ClientContext* context, const ::message::LoginReq* request, ::message::LoginRsp* response, std::function<void(::grpc::Status)>) = 0;
       virtual void Login(::grpc::ClientContext* context, const ::message::LoginReq* request, ::message::LoginRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 用户登录验证
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -324,6 +326,7 @@ class StatusService final {
     virtual ~Service();
     virtual ::grpc::Status GetChatServer(::grpc::ServerContext* context, const ::message::GetChatServerReq* request, ::message::GetChatServerRsp* response);
     virtual ::grpc::Status Login(::grpc::ServerContext* context, const ::message::LoginReq* request, ::message::LoginRsp* response);
+    // 用户登录验证
   };
   template <class BaseClass>
   class WithAsyncMethod_GetChatServer : public BaseClass {
@@ -597,6 +600,796 @@ class StatusService final {
   typedef WithStreamedUnaryMethod_GetChatServer<WithStreamedUnaryMethod_Login<Service > > StreamedUnaryService;
   typedef Service SplitStreamedService;
   typedef WithStreamedUnaryMethod_GetChatServer<WithStreamedUnaryMethod_Login<Service > > StreamedService;
+};
+
+class FindOfflineMessagesService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "message.FindOfflineMessagesService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::message::FindOtherServerOfflineMessagesRsp* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>> AsyncFindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>>(AsyncFindOtherServerOfflineMessagesRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>> PrepareAsyncFindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>>(PrepareAsyncFindOtherServerOfflineMessagesRaw(context, request, cq));
+    }
+    // 查询其他服务器离线消息
+    virtual ::grpc::Status FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::message::FindOfflineMessagesNumsRsp* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>> AsyncFindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>>(AsyncFindOfflineMessagesNumsRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>> PrepareAsyncFindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>>(PrepareAsyncFindOfflineMessagesNumsRaw(context, request, cq));
+    }
+    // 查询离线消息数量
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      virtual void FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 查询其他服务器离线消息
+      virtual void FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 查询离线消息数量
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>* AsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOtherServerOfflineMessagesRsp>* PrepareAsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>* AsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::FindOfflineMessagesNumsRsp>* PrepareAsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::message::FindOtherServerOfflineMessagesRsp* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>> AsyncFindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>>(AsyncFindOtherServerOfflineMessagesRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>> PrepareAsyncFindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>>(PrepareAsyncFindOtherServerOfflineMessagesRaw(context, request, cq));
+    }
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::message::FindOfflineMessagesNumsRsp* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>> AsyncFindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>>(AsyncFindOfflineMessagesNumsRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>> PrepareAsyncFindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>>(PrepareAsyncFindOfflineMessagesNumsRaw(context, request, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, std::function<void(::grpc::Status)>) override;
+      void FindOtherServerOfflineMessages(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, std::function<void(::grpc::Status)>) override;
+      void FindOfflineMessagesNums(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response, ::grpc::ClientUnaryReactor* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>* AsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::message::FindOtherServerOfflineMessagesRsp>* PrepareAsyncFindOtherServerOfflineMessagesRaw(::grpc::ClientContext* context, const ::message::FindOtherServerOfflineMessagesReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>* AsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::message::FindOfflineMessagesNumsRsp>* PrepareAsyncFindOfflineMessagesNumsRaw(::grpc::ClientContext* context, const ::message::FindOfflineMessagesNumsReq& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_FindOtherServerOfflineMessages_;
+    const ::grpc::internal::RpcMethod rpcmethod_FindOfflineMessagesNums_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response);
+    // 查询其他服务器离线消息
+    virtual ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response);
+    // 查询离线消息数量
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestFindOtherServerOfflineMessages(::grpc::ServerContext* context, ::message::FindOtherServerOfflineMessagesReq* request, ::grpc::ServerAsyncResponseWriter< ::message::FindOtherServerOfflineMessagesRsp>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestFindOfflineMessagesNums(::grpc::ServerContext* context, ::message::FindOfflineMessagesNumsReq* request, ::grpc::ServerAsyncResponseWriter< ::message::FindOfflineMessagesNumsRsp>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_FindOtherServerOfflineMessages<WithAsyncMethod_FindOfflineMessagesNums<Service > > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::message::FindOtherServerOfflineMessagesReq* request, ::message::FindOtherServerOfflineMessagesRsp* response) { return this->FindOtherServerOfflineMessages(context, request, response); }));}
+    void SetMessageAllocatorFor_FindOtherServerOfflineMessages(
+        ::grpc::MessageAllocator< ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* FindOtherServerOfflineMessages(
+      ::grpc::CallbackServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::message::FindOfflineMessagesNumsReq* request, ::message::FindOfflineMessagesNumsRsp* response) { return this->FindOfflineMessagesNums(context, request, response); }));}
+    void SetMessageAllocatorFor_FindOfflineMessagesNums(
+        ::grpc::MessageAllocator< ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* FindOfflineMessagesNums(
+      ::grpc::CallbackServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_FindOtherServerOfflineMessages<WithCallbackMethod_FindOfflineMessagesNums<Service > > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestFindOtherServerOfflineMessages(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestFindOfflineMessagesNums(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->FindOtherServerOfflineMessages(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* FindOtherServerOfflineMessages(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->FindOfflineMessagesNums(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* FindOfflineMessagesNums(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_FindOtherServerOfflineMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_FindOtherServerOfflineMessages() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::message::FindOtherServerOfflineMessagesReq, ::message::FindOtherServerOfflineMessagesRsp>* streamer) {
+                       return this->StreamedFindOtherServerOfflineMessages(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_FindOtherServerOfflineMessages() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status FindOtherServerOfflineMessages(::grpc::ServerContext* /*context*/, const ::message::FindOtherServerOfflineMessagesReq* /*request*/, ::message::FindOtherServerOfflineMessagesRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedFindOtherServerOfflineMessages(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::message::FindOtherServerOfflineMessagesReq,::message::FindOtherServerOfflineMessagesRsp>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_FindOfflineMessagesNums : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_FindOfflineMessagesNums() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::message::FindOfflineMessagesNumsReq, ::message::FindOfflineMessagesNumsRsp>* streamer) {
+                       return this->StreamedFindOfflineMessagesNums(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_FindOfflineMessagesNums() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status FindOfflineMessagesNums(::grpc::ServerContext* /*context*/, const ::message::FindOfflineMessagesNumsReq* /*request*/, ::message::FindOfflineMessagesNumsRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedFindOfflineMessagesNums(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::message::FindOfflineMessagesNumsReq,::message::FindOfflineMessagesNumsRsp>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_FindOtherServerOfflineMessages<WithStreamedUnaryMethod_FindOfflineMessagesNums<Service > > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_FindOtherServerOfflineMessages<WithStreamedUnaryMethod_FindOfflineMessagesNums<Service > > StreamedService;
+};
+
+class TransletMessageService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "message.TransletMessageService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::message::TransletMessageRsp* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>> AsyncTransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>>(AsyncTransletMessageRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>> PrepareAsyncTransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>>(PrepareAsyncTransletMessageRaw(context, request, cq));
+    }
+    // 转发消息
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      virtual void TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 转发消息
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>* AsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::TransletMessageRsp>* PrepareAsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::message::TransletMessageRsp* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>> AsyncTransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>>(AsyncTransletMessageRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>> PrepareAsyncTransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>>(PrepareAsyncTransletMessageRaw(context, request, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, std::function<void(::grpc::Status)>) override;
+      void TransletMessage(::grpc::ClientContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response, ::grpc::ClientUnaryReactor* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>* AsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::message::TransletMessageRsp>* PrepareAsyncTransletMessageRaw(::grpc::ClientContext* context, const ::message::TransletMessageReq& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_TransletMessage_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status TransletMessage(::grpc::ServerContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response);
+    // 转发消息
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestTransletMessage(::grpc::ServerContext* context, ::message::TransletMessageReq* request, ::grpc::ServerAsyncResponseWriter< ::message::TransletMessageRsp>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_TransletMessage<Service > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::message::TransletMessageReq, ::message::TransletMessageRsp>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::message::TransletMessageReq* request, ::message::TransletMessageRsp* response) { return this->TransletMessage(context, request, response); }));}
+    void SetMessageAllocatorFor_TransletMessage(
+        ::grpc::MessageAllocator< ::message::TransletMessageReq, ::message::TransletMessageRsp>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::message::TransletMessageReq, ::message::TransletMessageRsp>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* TransletMessage(
+      ::grpc::CallbackServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_TransletMessage<Service > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestTransletMessage(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->TransletMessage(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* TransletMessage(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_TransletMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_TransletMessage() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::message::TransletMessageReq, ::message::TransletMessageRsp>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::message::TransletMessageReq, ::message::TransletMessageRsp>* streamer) {
+                       return this->StreamedTransletMessage(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_TransletMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status TransletMessage(::grpc::ServerContext* /*context*/, const ::message::TransletMessageReq* /*request*/, ::message::TransletMessageRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedTransletMessage(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::message::TransletMessageReq,::message::TransletMessageRsp>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_TransletMessage<Service > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_TransletMessage<Service > StreamedService;
+};
+
+class SearchUserService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "message.SearchUserService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::message::SearchUserRsp* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>> AsyncSearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>>(AsyncSearchUserRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>> PrepareAsyncSearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>>(PrepareAsyncSearchUserRaw(context, request, cq));
+    }
+    // 搜索用户
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      virtual void SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 搜索用户
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>* AsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::message::SearchUserRsp>* PrepareAsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::message::SearchUserRsp* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>> AsyncSearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>>(AsyncSearchUserRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>> PrepareAsyncSearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>>(PrepareAsyncSearchUserRaw(context, request, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, std::function<void(::grpc::Status)>) override;
+      void SearchUser(::grpc::ClientContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response, ::grpc::ClientUnaryReactor* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>* AsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::message::SearchUserRsp>* PrepareAsyncSearchUserRaw(::grpc::ClientContext* context, const ::message::SearchUserReq& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_SearchUser_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status SearchUser(::grpc::ServerContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response);
+    // 搜索用户
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_SearchUser() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSearchUser(::grpc::ServerContext* context, ::message::SearchUserReq* request, ::grpc::ServerAsyncResponseWriter< ::message::SearchUserRsp>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_SearchUser<Service > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_SearchUser() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::message::SearchUserReq, ::message::SearchUserRsp>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::message::SearchUserReq* request, ::message::SearchUserRsp* response) { return this->SearchUser(context, request, response); }));}
+    void SetMessageAllocatorFor_SearchUser(
+        ::grpc::MessageAllocator< ::message::SearchUserReq, ::message::SearchUserRsp>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::message::SearchUserReq, ::message::SearchUserRsp>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* SearchUser(
+      ::grpc::CallbackServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_SearchUser<Service > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_SearchUser() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_SearchUser() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSearchUser(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_SearchUser() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->SearchUser(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* SearchUser(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SearchUser : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_SearchUser() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::message::SearchUserReq, ::message::SearchUserRsp>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::message::SearchUserReq, ::message::SearchUserRsp>* streamer) {
+                       return this->StreamedSearchUser(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_SearchUser() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SearchUser(::grpc::ServerContext* /*context*/, const ::message::SearchUserReq* /*request*/, ::message::SearchUserRsp* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSearchUser(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::message::SearchUserReq,::message::SearchUserRsp>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_SearchUser<Service > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_SearchUser<Service > StreamedService;
 };
 
 }  // namespace message
